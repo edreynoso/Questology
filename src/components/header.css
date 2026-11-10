@@ -1,0 +1,16 @@
+#header {
+    display: flex;
+    align-items: center;
+}
+
+.Menu,
+.ProfileIcon {
+    flex: 1;
+    display: flex;
+    justify-content: center'
+}
+
+.Title {
+    flex: 4;
+    text-align: center;
+}

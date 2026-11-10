@@ -1,0 +1,12 @@
+#footer {
+    display: flex;
+    align-items: center;
+}
+
+.CommunityIcon,
+.DiscoveryIcon,
+.QuestsIcon {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
