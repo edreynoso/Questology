@@ -3,15 +3,15 @@ import Footer from './footer'
 import './page.css'
 
 type PageProps = {
-    body: React.ReactNode
+    children: React.ReactNode
 }
 
-export default function Page({body}: PageProps) {
+export default function Page({children}: PageProps) {
     return (
         <>
         <div className="page-layout">
             <Header />
-            <main>{body}</main>
+            <main>{children}</main>
             <Footer />
         </div>
         </>
