@@ -4,7 +4,7 @@ export default function Login(){
     return (
         <>
         <Page>
-            There's text and body here
+            <i>There's text and body here</i>
         </Page>
         </>
     )

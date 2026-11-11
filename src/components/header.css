@@ -1,16 +1,19 @@
 #header {
     display: flex;
     align-items: center;
+    background: var(--color-primary);
 }
 
 .Menu,
 .ProfileIcon {
     flex: 1;
     display: flex;
-    justify-content: center'
+    justify-content: center;
+    color: var(--color-bg);
 }
 
 .Title {
     flex: 4;
     text-align: center;
+    color: var(--color-bg);
 }

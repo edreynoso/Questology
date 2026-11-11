@@ -1,6 +1,7 @@
 #footer {
     display: flex;
     align-items: center;
+    background: var(--color-primary);
 }
 
 .CommunityIcon,
@@ -9,4 +10,5 @@
     flex: 1;
     display: flex;
     justify-content: center;
+    color: var(--color-bg);
 }
