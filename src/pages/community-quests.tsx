@@ -1,6 +1,5 @@
 import Page from "../components/page";
 import "./community-quests.css";
-import { Link } from "react-router-dom";
 
 export default function CommunityQuests() {
   return (
@@ -30,11 +29,11 @@ export default function CommunityQuests() {
             <h3>Upcoming Quests</h3>
 
             <div className="quest-list">
-              <Link to="/quest/rock-climbing" className="quest-list-item">
+              <div className="quest-list-item">
                 <span className="quest-name">Rock Climbing Quest</span>
 
                 <span className="quest-date">January 1, 2027</span>
-              </Link>
+              </div>
             </div>
           </section>
         </div>
