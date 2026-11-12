@@ -1,14 +1,13 @@
 #footer {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
     background: var(--color-primary);
 }
 
 .CommunityIcon,
 .DiscoveryIcon,
 .QuestsIcon {
-    flex: 1;
-    display: flex;
     justify-content: center;
-    color: var(--color-bg);
+    align-items: center;
 }
