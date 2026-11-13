@@ -1,0 +1,106 @@
+/* main community page */
+
+.community-page {
+  width: 100%;
+  min-height: 100%;
+  background-color: #E3DAC9;
+  color: #222222;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+
+/* community banner */
+
+.community-banner {
+  background-color: #45503B;
+  padding: 12px 16px 30px;
+  color: white;
+}
+
+.community-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.community-heading h2 {
+  color: white;
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.community-status {
+  font-size: 12px;
+  color: #222222;
+  background-color: #ffffff;
+  border: 1px solid #444444;
+  padding: 1px 4px;
+}
+
+.community-banner p {
+  font-size: 11px;
+  margin-top: 6px;
+  color: white;
+}
+
+/* quest sections */
+
+.quest-sections {
+  padding: 4px 8px 24px;
+}
+
+.quest-sections section h3 {
+  font-size: 19px;
+  font-weight: 400;
+  color: #626361; 
+  margin: 0;
+}
+
+.active-quests {
+  margin-bottom: 4px;
+}
+
+.empty-quests {
+  color: #bcbcbc;
+  font-size: 14px;
+  margin: 2px 0 0 12px;
+}
+
+/* upcoming quests */
+
+.upcoming-quests {
+  margin-top: 4px;
+  color: #626361; 
+}
+
+.quest-list {
+  padding: 10px 16px;
+}
+
+.quest-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 8px;
+  border: 1px solid #ffffff; 
+  background-color: #ffffff;
+  color: #626361; 
+}
+
+.quest-name {
+  font-size: 14px;
+}
+
+.quest-date {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.page-layout main {
+    background-color: #E3DAC9;
+}

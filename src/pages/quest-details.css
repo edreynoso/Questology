@@ -1,0 +1,131 @@
+
+.quest-details {
+    padding: 24px;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #626361;
+}
+
+.quest-card {
+    background:#E3DAC9;
+    border: 1px solid;
+    padding: 28px;
+    text-align: left;
+    color: #333333;
+}
+
+.quest-card h2 {
+    font-size: 28px;
+    margin-bottom: 28px;
+    text-align: center;
+    color: #626361;
+}
+
+.quest-information {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.quest-information section h3 {
+    font-size: 17px;
+    margin: 0 0 4px;
+    color: #626361;
+}
+
+.quest-information section p,
+.quest-information li {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #626361;
+}
+
+.quest-information section p {
+    margin: 0;
+}
+
+.requirements-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #626361;
+}
+
+.requirements-checkbox input {
+    width: 18px;
+    height: 18px;
+    accent-color: #626361;
+}
+
+.rsvp-button {
+    display: block;
+    margin: 24px auto 0;
+    padding: 12px 38px;
+    background: #160142; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.rsvp-button:disabled {
+    cursor: not-allowed;
+}
+
+
+/* reminder notif popup */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.reminder-modal {
+    background: #E3DAC9;
+    color: #333333;
+    padding: 32px;
+    width: 320px;
+    max-width: calc(100% - 48px);
+    text-align: center;
+}
+
+.reminder-modal h2 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 28px;
+    color: #626361;
+}
+
+.reminder-modal h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 20px;
+    color: #626361;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #626361;
+    border-radius: 6px;
+    background: white;
+    color: #626361;
+    cursor: pointer;
+    font-size: 15px;
+}
