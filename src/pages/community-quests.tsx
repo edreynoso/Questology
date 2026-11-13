@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { FaCog } from "react-icons/fa";
 import { toast } from "react-toastify";
 import CreateQuestButton from "../components/createQuestButton";
 import CreateQuestModal from "../components/createQuestModal";
@@ -15,6 +16,11 @@ type QuestListProps = {
   emptyText: string;
   onSelect: (quest: QuestProps) => void;
   signedUpQuestIds: string[];
+};
+
+type CommunityQuestsProps = {
+  onQuestSubmitted: (quest: QuestProps) => void;
+  approvedQuests: QuestProps[];
 };
 
 function QuestList({
@@ -59,26 +65,40 @@ function QuestList({
   );
 }
 
-export default function CommunityQuests() {
+export default function CommunityQuests({
+  onQuestSubmitted,
+  approvedQuests,
+}: CommunityQuestsProps) {
   const { communityId } = useParams();
   const community = getCommunity(communityId);
+  const navigate = useNavigate();
   const [selectedQuest, setSelectedQuest] = useState<QuestProps | null>(null);
   const [showCreateQuest, setShowCreateQuest] = useState(false);
+  const [signedUpQuestIds, setSignedUpQuestIds] = useState<string[]>([]);
 
   if (!community) {
     return <NotFound />;
   }
 
-  const quests = [
-    ...(community.communityQuestIds ?? [])
-      .map(getQuest)
-      .filter((quest): quest is QuestProps => quest !== undefined),
-  ].sort((a, b) => a.date.localeCompare(b.date));
+ const existingQuests = (community.communityQuestIds ?? [])
+    .map(getQuest)
+    .filter((quest): quest is QuestProps => quest !== undefined);
+
+  const newlyApprovedQuests =
+    community.id === "rock-climbing" ? approvedQuests : [];
+
+  const quests = [...existingQuests, ...newlyApprovedQuests].sort((a, b) =>
+    a.date.localeCompare(b.date),
+  );
   const activeQuests = quests.filter((quest) => quest.status === "active");
   const upcomingQuests = quests.filter((quest) => quest.status === "upcoming");
-  const [signedUpQuestIds, setSignedUpQuestIds] = useState<string[]>([]);
-
+  const isModeratedCommunity = community.id === "rock-climbing";
+  
   function handleSubmitForReview(quest: QuestProps) {
+    if (isModeratedCommunity) {
+      onQuestSubmitted(quest);
+    }
+
     setShowCreateQuest(false);
     toast.success(`${quest.name} was submitted for review!`);
   }
@@ -103,7 +123,33 @@ export default function CommunityQuests() {
         >
           <div className="community-heading">
             <h2>{community.name}</h2>
-            <span className="community-status">Joined</span>
+
+            <div className="community-actions">
+              <span className="community-status">Joined</span>
+
+              {community.id === "rock-climbing" && (
+                <div className="community-action-buttons">
+                  <button
+                    type="button"
+                    className="pending-quests-button"
+                    onClick={() => navigate("/moderator/quests")}
+                  >
+                    Pending Quests
+                  </button>
+
+                  <button
+                    type="button"
+                    className="community-settings-button"
+                    onClick={() =>
+                      toast.info("Community settings are not implemented yet!")
+                    }
+                  >
+                    <FaCog aria-hidden="true" />
+                    Settings
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           <p>{community.description}</p>
@@ -119,7 +165,6 @@ export default function CommunityQuests() {
               emptyText="None at the moment..."
               onSelect={setSelectedQuest}
               signedUpQuestIds={signedUpQuestIds}
-              
             />
           </section>
 

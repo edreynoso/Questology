@@ -10,6 +10,7 @@
 }
 
 .community-banner {
+  position: relative;
   background-color: var(--color-secondary);
   padding: 12px 16px 30px;
   color: var(--color-surface);
@@ -134,4 +135,49 @@ button.quest-list-item + button.quest-list-item {
   font-size: 1.1rem;
   font-weight: 800;
   line-height: 1;
+}
+
+.community-actions {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  bottom: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.community-actions .community-status {
+  margin-top: 0;
+}
+
+.community-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.community-settings-button,
+.pending-quests-button {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 7px;
+  border: 1px solid var(--color-surface);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-surface);
+  font: inherit;
+  font-size: 10px;
+  line-height: 1.1;
+  cursor: pointer;
+}
+
+.community-settings-button:hover,
+.community-settings-button:focus-visible,
+.pending-quests-button:hover,
+.pending-quests-button:focus-visible {
+  background: rgba(255, 255, 255, 0.16);
 }
