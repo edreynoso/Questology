@@ -7,6 +7,7 @@
   color: #222222;
   text-align: left;
   box-sizing: border-box;
+  padding-bottom: 32px;
 }
 
 
@@ -103,4 +104,14 @@
 
 .page-layout main {
     background-color: #E3DAC9;
+}
+
+button.quest-list-item {
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+button.quest-list-item + button.quest-list-item {
+  margin-top: 6px;
 }

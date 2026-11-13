@@ -1,14 +1,4 @@
-
-.quest-details {
-    padding: 24px;
-    max-width: 700px;
-    margin: 0 auto;
-    color: #626361;
-}
-
 .quest-card {
-    background:#E3DAC9;
-    border: 1px solid;
     padding: 28px;
     text-align: left;
     color: #333333;
@@ -78,22 +68,10 @@
 
 /* reminder notif popup */
 
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
 .reminder-modal {
-    background: #E3DAC9;
     color: #333333;
     padding: 32px;
-    width: 320px;
-    max-width: calc(100% - 48px);
+    max-width: 320px;
     text-align: center;
 }
 
@@ -129,3 +107,4 @@
     cursor: pointer;
     font-size: 15px;
 }
+

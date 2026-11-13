@@ -1,0 +1,29 @@
+.CommunityBanner {
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    align-items: flex-end;
+    box-sizing: border-box;
+    height: 91px;
+    margin: 0 8px;
+    padding: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-secondary);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.CommunityBanner + .CommunityBanner {
+    margin-top: 32px;
+}
+
+.CommunityBanner h2 {
+    margin: 0;
+    color: var(--color-bg);
+}
+
+.CommunityBanner h2 {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
