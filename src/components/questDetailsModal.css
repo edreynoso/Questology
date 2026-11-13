@@ -121,3 +121,82 @@
     font-size: 15px;
 }
 
+.review-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.review-actions button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.review-approve-button {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.review-deny-button {
+  border: 1px solid var(--color-primary) !important;
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.review-reason-modal {
+  max-width: 420px;
+  padding: 28px;
+  color: var(--color-text-accent);
+}
+
+.review-reason-modal h2 {
+  margin: 0 0 18px;
+  font-size: 22px;
+}
+
+.review-reason-modal label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.review-reason-modal textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: vertical;
+  padding: 10px;
+  border: 1px solid var(--color-primary);
+  border-radius: 6px;
+  font: inherit;
+}
+
+.review-reason-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.review-reason-actions button {
+  padding: 8px 14px;
+  border: 1px solid var(--color-primary);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.review-reason-actions button[type="submit"] {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
