@@ -1,45 +1,37 @@
+import type { IconType } from 'react-icons'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import './navButton.css'
-import  {Link, useNavigate} from 'react-router-dom'
-import {toast} from 'react-toastify'
 
 type NavButtonProps = {
-    icon: string;
-    alt?: string; 
+    icon: IconType;
+    label: string;
 } & (
-    | { action: "toast"; message: string }
-    | { action: "navigate"; to: string }
-    | { action: "back"}
+    | { action: 'navigate'; to: string }
+    | { action: 'toast'; message: string }
+    | { action: 'back' }
 )
 
 export default function NavButton(props: NavButtonProps) {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const { icon: Icon, label } = props
+    const content = <Icon aria-hidden="true" />
 
-  if (props.action === "navigate") {
+    if (props.action === 'navigate') {
+        return (
+            <NavLink to={props.to} className="NavButton" aria-label={label} title={label}>
+                {content}
+            </NavLink>
+        )
+    }
+
+    const handleClick = props.action === 'back'
+        ? () => navigate(-1)
+        : () => toast.info(props.message)
+
     return (
-    <>
-    <Link className="navigation-button" to={props.to}>
-        <img src={props.icon} alt={props.alt} />
-    </Link>
-    </>
-   )
-  }
-  if (props.action === "back") {
-    return (
-    <>
-    <button className="navigation-button" type="button"
-      onClick={() => navigate(-1)}>
-        <img src={props.icon} alt={props.alt} />
-    </button>
-    </>
+        <button type="button" className="NavButton" aria-label={label} title={label} onClick={handleClick}>
+            {content}
+        </button>
     )
-  }
-  // Default to toast, only 3 supported
-  return (
-    <>
-    <button className="navigation-button" type="button"
-      onClick={() => toast.info(props.message)}>
-        <img src={props.icon} alt={props.alt} />
-    </button>
-    </>
-   )
 }

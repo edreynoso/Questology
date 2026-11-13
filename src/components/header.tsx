@@ -1,25 +1,23 @@
 import './header.css'
+import { FaArrowLeft, FaUser } from 'react-icons/fa'
 import NavButton from './navButton'
-import backArrow from "../assets/backArrow.png"
-import profileImage from "../assets/profileImageREPLACEME.svg"
 
 export default function Header() {
     return (
-        <>
         <section id="header">
-            <NavButton
-                icon={backArrow}
-                alt="Arrow point left, or 'backwards'."
-                action="back"/>
+            <div className="Back">
+                <NavButton icon={FaArrowLeft} label="Back" action="back"/>
+            </div>
             <div className="Title">
                 <h1>Questology</h1>
             </div>
-            <NavButton
-                icon={profileImage}
-                alt="Small rounded user profile image."
-                action="toast"
-                message="Profile settings are not implemented!"/>
+            <div className="ProfileIcon">
+                <NavButton
+                    icon={FaUser}
+                    label="Profile"
+                    action="toast"
+                    message="Profile settings are not implemented!"/>
+            </div>
         </section>
-        </>
     )
 }

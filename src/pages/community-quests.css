@@ -1,48 +1,51 @@
-/* main community page */
 
 .community-page {
   width: 100%;
   min-height: 100%;
-  background-color: #E3DAC9;
-  color: #222222;
+  background-color: var(--color-bg);
+  color: var(--color-text-accent);
   text-align: left;
   box-sizing: border-box;
+  padding-bottom: 104px;
 }
 
-
-/* community banner */
-
 .community-banner {
-  background-color: #45503B;
+  background-color: var(--color-secondary);
   padding: 12px 16px 30px;
-  color: white;
+  color: var(--color-surface);
 }
 
 .community-heading {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .community-heading h2 {
-  color: white;
-  font-size: 28px;
-  font-weight: 400;
+  color: var(--color-surface);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.15;
   margin: 0;
+  text-shadow: 0 1px 3px var(--color-shadow);
 }
 
 .community-status {
-  font-size: 12px;
-  color: #222222;
-  background-color: #ffffff;
-  border: 1px solid #444444;
-  padding: 1px 4px;
+  flex-shrink: 0;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border: 1px solid var(--color-surface);
+  border-radius: 999px;
+  color: var(--color-surface);
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .community-banner p {
   font-size: 11px;
   margin-top: 6px;
-  color: white;
+  color: var(--color-surface);
 }
 
 /* quest sections */
@@ -54,7 +57,7 @@
 .quest-sections section h3 {
   font-size: 19px;
   font-weight: 400;
-  color: #626361; 
+  color: var(--color-text-accent);
   margin: 0;
 }
 
@@ -63,7 +66,7 @@
 }
 
 .empty-quests {
-  color: #bcbcbc;
+  color: var(--color-text-muted);
   font-size: 14px;
   margin: 2px 0 0 12px;
 }
@@ -72,7 +75,7 @@
 
 .upcoming-quests {
   margin-top: 4px;
-  color: #626361; 
+  color: var(--color-text-accent);
 }
 
 .quest-list {
@@ -87,9 +90,9 @@
   width: 100%;
   box-sizing: border-box;
   padding: 7px 8px;
-  border: 1px solid #ffffff; 
-  background-color: #ffffff;
-  color: #626361; 
+  border: 1px solid var(--color-surface);
+  background-color: var(--color-surface);
+  color: var(--color-text-accent);
 }
 
 .quest-name {
@@ -102,5 +105,15 @@
 }
 
 .page-layout main {
-    background-color: #E3DAC9;
+    background-color: var(--color-bg);
+}
+
+button.quest-list-item {
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+button.quest-list-item + button.quest-list-item {
+  margin-top: 6px;
 }

@@ -1,7 +1,9 @@
 #header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    align-items: center;
+    min-height: 80px;
+    padding: 0 1rem;
     background: var(--color-primary);
 }
 
@@ -11,9 +13,20 @@
     display: flex;
 }
 
+.ProfileIcon {
+    justify-content: flex-end;
+}
+
 .Title {
     flex: 3;
     text-align: center;
-    align-items: center;
     color: var(--color-bg);
+}
+
+#header .NavButton {
+    font-size: 44px;
+}
+
+.Title h1 {
+    color: var(--color-surface);
 }
