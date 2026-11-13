@@ -8,9 +8,21 @@ export default function Footer() {
     return (
         <>
         <section id="footer">
-            <NavButton icon={communitiesIcon} alt="Image of three silluettes" />
-            <NavButton icon={discoveryIcon} alt="Icon of stylized compass" />
-            <NavButton icon={questsIcon} alt="Image of a scroll containing generic text." />
+            <NavButton
+              icon={communitiesIcon}
+              alt="Image of three silluettes"
+              action="navigate"
+              to="../pages/communities"/>
+            <NavButton
+              icon={discoveryIcon}
+              alt="Icon of stylized compass"
+              action="toast"
+              message="Discovery is not currently implemented!"/>
+            <NavButton
+              icon={questsIcon}
+              alt="Image of a scroll containing generic text."
+              action="toast"
+              message="Your Quests page is currently under maintenance!"/>
         </section>
         </>
     )
