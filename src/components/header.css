@@ -26,3 +26,7 @@
 #header .NavButton {
     font-size: 44px;
 }
+
+.Title h1 {
+    color: var(--color-surface);
+}

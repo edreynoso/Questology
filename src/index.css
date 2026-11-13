@@ -7,6 +7,10 @@
   --color-text-accent: #626361;
   --color-text-muted: #898B87;
   --color-bg: #E3DAC9;
+  --color-surface: #FFFFFF;
+  --color-overlay: rgba(0, 0, 0, 0.55);
+  --color-shadow: rgba(0, 0, 0, 0.6);
+  --color-tint: rgba(0, 0, 0, 0.45);
 }
 
 

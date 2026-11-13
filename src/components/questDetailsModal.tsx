@@ -9,7 +9,10 @@ type QuestDetailsModalProps = {
   onClose: () => void;
 };
 
-export default function QuestDetailsModal({ quest, onClose }: QuestDetailsModalProps) {
+export default function QuestDetailsModal({
+  quest,
+  onClose,
+}: QuestDetailsModalProps) {
   const [acknowledged, setAcknowledged] = useState(false); // requirements
   const [showReminder, setShowReminder] = useState(false); // popup notif
 
@@ -17,7 +20,7 @@ export default function QuestDetailsModal({ quest, onClose }: QuestDetailsModalP
     toast.success(
       allowReminders
         ? `Successfully RSVP'd to ${quest.name}! We'll remind you before it starts.`
-        : `Successfully RSVP'd to ${quest.name}!`
+        : `Successfully RSVP'd to ${quest.name}!`,
     );
     onClose(); // closes both modals
   }
@@ -58,23 +61,32 @@ export default function QuestDetailsModal({ quest, onClose }: QuestDetailsModalP
           </section>
         </div>
 
-        <label className="requirements-checkbox">
-          <input
-            type="checkbox"
-            checked={acknowledged}
-            onChange={(event) => setAcknowledged(event.target.checked)}
-          />
-          I acknowledge all requirements...
-        </label>
+        {quest.status === "active" ? (
+          <p className="participant-count">
+            <strong>{quest.participantCount ?? 0}</strong>{" "}
+            {quest.participantCount === 1 ? "participant" : "participants"}
+          </p>
+        ) : (
+          <>
+            <label className="requirements-checkbox">
+              <input
+                type="checkbox"
+                checked={acknowledged}
+                onChange={(event) => setAcknowledged(event.target.checked)}
+              />
+              I acknowledge all requirements...
+            </label>
 
-        <button
-          type="button"
-          className="rsvp-button"
-          onClick={() => setShowReminder(true)}
-          disabled={!acknowledged}
-        >
-          RSVP
-        </button>
+            <button
+              type="button"
+              className="rsvp-button"
+              onClick={() => setShowReminder(true)}
+              disabled={!acknowledged}
+            >
+              RSVP
+            </button>
+          </>
+        )}
       </Modal>
 
       {showReminder && (
@@ -89,8 +101,16 @@ export default function QuestDetailsModal({ quest, onClose }: QuestDetailsModalP
           <h3>Allow Reminders?</h3>
 
           <div className="modal-buttons">
-            <button type="button" autoFocus onClick={() => handleReminderChoice(true)}>Yes</button>
-            <button type="button" onClick={() => handleReminderChoice(false)}>No</button>
+            <button
+              type="button"
+              autoFocus
+              onClick={() => handleReminderChoice(true)}
+            >
+              Yes
+            </button>
+            <button type="button" onClick={() => handleReminderChoice(false)}>
+              No
+            </button>
           </div>
         </Modal>
       )}

@@ -1,0 +1,20 @@
+.CreateQuestButton {
+    position: fixed;
+    right: 16px;
+    /* sit just above the sticky footer */
+    bottom: calc(96px + env(safe-area-inset-bottom) + 16px);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-bg);
+    font-size: 22px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}

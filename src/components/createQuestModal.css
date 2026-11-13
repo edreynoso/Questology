@@ -1,0 +1,128 @@
+.create-quest-modal {
+    padding: 28px;
+    color: var(--color-text-accent);
+}
+
+.create-quest-modal h2 {
+    margin: 0;
+    font-size: 26px;
+    text-align: center;
+    color: var(--color-text-accent);
+}
+
+.create-quest-community {
+    margin: 4px 0 24px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.create-quest-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.create-quest-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.create-quest-form input,
+.create-quest-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-text-muted);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text-accent);
+    font: inherit;
+    font-weight: 400;
+}
+
+.create-quest-form textarea {
+    resize: vertical;
+}
+
+.create-quest-form input:focus-visible,
+.create-quest-form textarea:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+}
+
+.create-quest-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.create-quest-hint {
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.create-quest-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.create-quest-actions button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.create-quest-cancel {
+    border: 1px solid var(--color-text-accent);
+    background: var(--color-surface);
+    color: var(--color-text-accent);
+}
+
+.create-quest-submit {
+    border: none;
+    background: var(--color-primary);
+    color: var(--color-surface);
+}
+
+@media (max-width: 400px) {
+    .create-quest-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.create-quest-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.community-requirements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 0 24px;
+    padding-left: 22px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.community-requirements-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.community-requirements-check input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+}
