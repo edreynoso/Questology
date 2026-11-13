@@ -1,19 +1,19 @@
 #header {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
     background: var(--color-primary);
 }
 
-.Menu,
+.Back,
 .ProfileIcon {
     flex: 1;
     display: flex;
-    justify-content: center;
-    color: var(--color-bg);
 }
 
 .Title {
-    flex: 4;
+    flex: 3;
     text-align: center;
+    align-items: center;
     color: var(--color-bg);
 }

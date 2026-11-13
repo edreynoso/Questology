@@ -1,18 +1,24 @@
 import './header.css'
+import NavButton from './navButton'
+import backArrow from "../assets/backArrow.png"
+import profileImage from "../assets/profileImageREPLACEME.svg"
 
 export default function Header() {
     return (
         <>
         <section id="header">
-            <div className="Menu">
-                // Menu icon goes here
-            </div>
+            <NavButton
+                icon={backArrow}
+                alt="Arrow point left, or 'backwards'."
+                action="back"/>
             <div className="Title">
                 <h1>Questology</h1>
             </div>
-            <div className="ProfileIcon">
-                // Profile Image goes here
-            </div>
+            <NavButton
+                icon={profileImage}
+                alt="Small rounded user profile image."
+                action="toast"
+                message="Profile settings are not implemented!"/>
         </section>
         </>
     )

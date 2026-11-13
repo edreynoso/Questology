@@ -1,5 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import Login from './pages/login'
 import './App.css'
 
 function AppRoutes() {
@@ -15,11 +16,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <AppRoutes/>
-      <ToastContainer
-        position='top-right'
-        autoClose={300}
-        theme='colored'
-      />
+      <Login />
+      <ToastContainer />
     </BrowserRouter>
   )
 }
