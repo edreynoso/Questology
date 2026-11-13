@@ -7,16 +7,19 @@ import "./questDetailsModal.css";
 type QuestDetailsModalProps = {
   quest: QuestProps;
   onClose: () => void;
+  onRsvp: (questId: string) => void;
 };
 
 export default function QuestDetailsModal({
   quest,
   onClose,
+  onRsvp,
 }: QuestDetailsModalProps) {
   const [acknowledged, setAcknowledged] = useState(false); // requirements
   const [showReminder, setShowReminder] = useState(false); // popup notif
 
   function handleReminderChoice(allowReminders: boolean) {
+    onRsvp(quest.id);
     toast.success(
       allowReminders
         ? `Successfully RSVP'd to ${quest.name}! We'll remind you before it starts.`

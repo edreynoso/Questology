@@ -117,3 +117,21 @@ button.quest-list-item {
 button.quest-list-item + button.quest-list-item {
   margin-top: 6px;
 }
+
+.quest-list-item--joined {
+  border: 2px solid var(--color-primary);
+}
+
+.quest-name-with-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.quest-joined-mark {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+}

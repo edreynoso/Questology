@@ -14,25 +14,47 @@ type QuestListProps = {
   quests: QuestProps[];
   emptyText: string;
   onSelect: (quest: QuestProps) => void;
+  signedUpQuestIds: string[];
 };
 
-function QuestList({ quests, emptyText, onSelect }: QuestListProps) {
+function QuestList({
+  quests,
+  emptyText,
+  onSelect,
+  signedUpQuestIds,
+}: QuestListProps) {
   if (quests.length === 0) {
     return <p className="empty-quests">{emptyText}</p>;
   }
+
   return (
     <div className="quest-list">
-      {quests.map((quest) => (
-        <button
-          key={quest.id}
-          type="button"
-          className="quest-list-item"
-          onClick={() => onSelect(quest)}
-        >
-          <span className="quest-name">{quest.name}</span>
-          <span className="quest-date">{formatQuestDate(quest.date)}</span>
-        </button>
-      ))}
+      {quests.map((quest) => {
+        const hasSignedUp = signedUpQuestIds.includes(quest.id);
+
+        return (
+          <button
+            key={quest.id}
+            type="button"
+            className={`quest-list-item ${
+              hasSignedUp ? "quest-list-item--joined" : ""
+            }`}
+            onClick={() => onSelect(quest)}
+          >
+            <span className="quest-name-with-check">
+              <span className="quest-name">{quest.name}</span>
+
+              {hasSignedUp && (
+                <span className="quest-joined-mark" aria-label="Signed up">
+                  ✓
+                </span>
+              )}
+            </span>
+
+            <span className="quest-date">{formatQuestDate(quest.date)}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -54,12 +76,23 @@ export default function CommunityQuests() {
   ].sort((a, b) => a.date.localeCompare(b.date));
   const activeQuests = quests.filter((quest) => quest.status === "active");
   const upcomingQuests = quests.filter((quest) => quest.status === "upcoming");
+  const [signedUpQuestIds, setSignedUpQuestIds] = useState<string[]>([]);
 
   function handleSubmitForReview(quest: QuestProps) {
     setShowCreateQuest(false);
     toast.success(`${quest.name} was submitted for review!`);
   }
 
+  function handleRsvp(questId: string) {
+    setSignedUpQuestIds((currentIds) => {
+      if (currentIds.includes(questId)) {
+        return currentIds;
+      }
+
+      return [...currentIds, questId];
+    });
+  }
+  
   return (
     <>
       <div className="community-page">
@@ -85,6 +118,8 @@ export default function CommunityQuests() {
               quests={activeQuests}
               emptyText="None at the moment..."
               onSelect={setSelectedQuest}
+              signedUpQuestIds={signedUpQuestIds}
+              
             />
           </section>
 
@@ -95,6 +130,7 @@ export default function CommunityQuests() {
               quests={upcomingQuests}
               emptyText="None at the moment..."
               onSelect={setSelectedQuest}
+              signedUpQuestIds={signedUpQuestIds}
             />
           </section>
         </div>
@@ -116,6 +152,7 @@ export default function CommunityQuests() {
           key={selectedQuest.id}
           quest={selectedQuest}
           onClose={() => setSelectedQuest(null)}
+          onRsvp={handleRsvp}
         />
       )}
     </>
