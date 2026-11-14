@@ -1,16 +1,29 @@
-# React + Vite
+## How to run
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```bash
+git clone https://github.com/edreynoso/Questology.git
+cd Questology
+npm install
+npm run dev
+```
 
-Currently, two official plugins are available:
+Open the URL Vite prints (usually http://localhost:5173).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Viewing on mobile
 
-## React Compiler
+The app is designed for mobile screens only. On desktop, open the browser dev tools and turn on device emulation (Chrome: `Ctrl+Shift+M` / `Cmd+Shift+M`), then choose a phone such as iPhone 14 or Pixel 7.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Notes for user testing
 
-## Expanding the ESLint configuration
+State is kept in `localStorage`, so it survives page refreshes:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Key | Holds |
+|---|---|
+| `questology:loggedIn` | Whether the tester is logged in |
+| `questology:questState` | Created quests, approvals/denials and RSVPs |
+
+To reset the app between testers, clear both keys (dev tools → Application → Local Storage), or clear site data. Seed data always reloads from `src/data`.
+
+## Team contributions
+
+- **Edgar**: login and signup pages, create quest flow and modal views
