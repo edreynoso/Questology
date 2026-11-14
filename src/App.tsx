@@ -32,7 +32,7 @@ export default function App() {
     <BrowserRouter>
       <AppRoutes/>
       <ToastContainer
-        position='top-right'
+        position='top-center'
         autoClose={3000}
         theme='colored'
       />

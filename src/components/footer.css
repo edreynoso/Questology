@@ -5,7 +5,30 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    min-height: 96px;
+    min-height: 78px;
     padding: 0 1rem env(safe-area-inset-bottom);
-    background: var(--color-primary);
+    background: linear-gradient(0deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    box-shadow: 0 -4px 12px var(--color-bar-shadow);
+}
+
+/* Active tab indicator: pill under the current tab's icon */
+#footer .NavButton {
+    position: relative;
+}
+
+#footer .NavButton::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 0;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--color-surface);
+    transform: translateX(-50%);
+    transition: width 0.2s ease;
+}
+
+#footer .NavButton.active::after {
+    width: 28px;
 }

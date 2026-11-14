@@ -5,6 +5,8 @@ export interface CommunityProps {
     id : string;
     name : string;
     description : string;
+    /** Moderated communities require quests to be approved before they are listed */
+    isModerated : boolean;
     /** Rules every quest in this community must follow */
     questRequirements : string[];
     bannerUrl : string | undefined;
@@ -16,6 +18,7 @@ export const communityData : CommunityProps[] = [
         id : "rock-climbing",
         name : "Rock Climbing",
         description : "A very great description about rock climbing...",
+        isModerated : true,
         questRequirements : [
             "Quests must take place at a gym or an established climbing area.",
             "At least one participant must hold a current belay certification.",
@@ -30,6 +33,7 @@ export const communityData : CommunityProps[] = [
         id : "hiking",
         name : "Hiking",
         description : "A very great description about hiking...",
+        isModerated : false,
         questRequirements : [
             "Routes must stay on established, public trails.",
             "Include the trail distance and elevation gain in the description.",

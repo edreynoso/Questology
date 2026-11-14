@@ -10,7 +10,7 @@ export default function CommunityBanner({
   community: CommunityProps;
 }) {
   const style = bannerStyle(community.bannerUrl);
-  const isModeratedCommunity = community.id === "rock-climbing";
+  const isModeratedCommunity = community.isModerated;
 
   return (
     <div className="CommunityBannerWrapper">
