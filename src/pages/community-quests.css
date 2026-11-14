@@ -79,6 +79,13 @@
   color: var(--color-text-accent);
 }
 
+/* pending quests (moderators only) */
+
+.pending-quests {
+  margin-top: 4px;
+  color: var(--color-text-accent);
+}
+
 .quest-list {
   padding: 10px 16px;
 }
@@ -159,8 +166,7 @@ button.quest-list-item + button.quest-list-item {
   gap: 4px;
 }
 
-.community-settings-button,
-.pending-quests-button {
+.community-settings-button {
   display: flex;
   align-items: center;
   gap: 3px;
@@ -176,8 +182,6 @@ button.quest-list-item + button.quest-list-item {
 }
 
 .community-settings-button:hover,
-.community-settings-button:focus-visible,
-.pending-quests-button:hover,
-.pending-quests-button:focus-visible {
+.community-settings-button:focus-visible {
   background: rgba(255, 255, 255, 0.16);
 }

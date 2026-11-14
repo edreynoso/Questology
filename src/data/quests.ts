@@ -1,8 +1,14 @@
+import { getCommunity } from "./communities";
+
 export type QuestStatus = "active" | "upcoming";
+
+/** Moderator review state. Only approved quests show on the community page. */
+export type QuestApproval = "pending" | "approved";
 
 export interface QuestProps {
     id : string;
     status : QuestStatus;
+    approval : QuestApproval;
     name : string;
     // YYYY-MM-DD 
     date : string;
@@ -18,6 +24,7 @@ export const questData : QuestProps[] = [
     {
         id : "rock-climbing-quest",
         status : "upcoming",
+        approval : "approved",
         name : "Rock Climbing Quest",
         date : "2027-01-01",
         time : "12:00 PM PST",
@@ -32,6 +39,7 @@ export const questData : QuestProps[] = [
     {
         id : "hiking-quest",
         status : "upcoming",
+        approval : "approved",
         name : "Hiking Quest",
         date : "2027-01-15",
         time : "9:00 AM PST",
@@ -45,6 +53,7 @@ export const questData : QuestProps[] = [
     {
         id : "bouldering-meetup",
         status : "active",
+        approval : "approved",
         name : "Bouldering Meetup",
         date : "2026-11-12",
         time : "4:00 PM PST",
@@ -59,6 +68,7 @@ export const questData : QuestProps[] = [
     {
         id : "sunset-crag-session",
         status : "active",
+        approval : "approved",
         name : "Sunset Crag Session",
         date : "2026-11-12",
         time : "5:30 PM PST",
@@ -74,6 +84,7 @@ export const questData : QuestProps[] = [
     {
         id : "morning-trail-hike",
         status : "active",
+        approval : "approved",
         name : "Morning Trail Hike",
         date : "2026-11-12",
         time : "8:00 AM PST",
@@ -86,6 +97,33 @@ export const questData : QuestProps[] = [
     }
 
 ];
+
+/** Adds a newly created quest to a community, awaiting moderator review. */
+export function submitQuest(quest : QuestProps, communityId : string) : void {
+    questData.push({ ...quest, approval : "pending" })
+    const community = getCommunity(communityId)
+    if (community) {
+        community.communityQuestIds = [...(community.communityQuestIds ?? []), quest.id]
+    }
+}
+
+/** Approve marks the quest approved; deny removes it from the data. */
+export function reviewQuest(id : string, action : "approve" | "deny") : void {
+    const index = questData.findIndex((quest) => quest.id === id)
+    if (index === -1) return
+    if (action === "approve") {
+        questData[index] = { ...questData[index], approval : "approved", status : "upcoming" }
+    } else {
+        questData.splice(index, 1)
+    }
+}
+
+export function getCommunityQuests(communityId : string | undefined, approval : QuestApproval) : QuestProps[] {
+    return (getCommunity(communityId)?.communityQuestIds ?? [])
+        .map(getQuest)
+        .filter((quest) : quest is QuestProps => quest !== undefined && quest.approval === approval)
+        .sort((a, b) => a.date.localeCompare(b.date))
+}
 
 export function getQuest(id : string | undefined) : QuestProps | undefined {
     return questData.find((quest) => quest.id === id)

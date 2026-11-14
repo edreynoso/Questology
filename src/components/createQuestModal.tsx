@@ -42,6 +42,7 @@ export default function CreateQuestModal({
     onSubmitForReview({
       id: crypto.randomUUID(),
       status: "upcoming",
+      approval: "pending",
       name: name.trim(),
       date,
       time: formatTime(time),

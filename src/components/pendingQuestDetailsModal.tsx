@@ -18,29 +18,24 @@ export default function PendingQuestDetailsModal({
   onClose,
   onReview,
 }: PendingQuestDetailsModalProps) {
-  const [reviewAction, setReviewAction] = useState<ReviewAction | null>(null);
+  const [showDenyForm, setShowDenyForm] = useState(false);
   const [reason, setReason] = useState("");
 
-  function openReviewPopup(action: ReviewAction) {
-    setReason("");
-    setReviewAction(action);
+  function finishReview(action: ReviewAction) {
+    onReview(action);
+    toast.success(`${quest.name} was ${action === "approve" ? "approved" : "denied"}.`);
+    onClose();
   }
 
-  function handleReviewSubmit(event: FormEvent<HTMLFormElement>) {
+  function openDenyForm() {
+    setReason("");
+    setShowDenyForm(true);
+  }
+
+  function handleDenySubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    const actionLabel =
-      reviewAction === "approve" ? "approved" : "denied";
-
-
-    if (!reviewAction) {
-        return;
-    }
-
-    onReview(reviewAction);
-    toast.success(`${quest.name} was ${actionLabel}.`);
-    setReviewAction(null);
-    onClose();
+    setShowDenyForm(false);
+    finishReview("deny");
   }
 
   return (
@@ -87,7 +82,7 @@ export default function PendingQuestDetailsModal({
           <button
             type="button"
             className="review-approve-button"
-            onClick={() => openReviewPopup("approve")}
+            onClick={() => finishReview("approve")}
           >
             <FaCheck aria-hidden="true" />
             Approve Quest
@@ -96,7 +91,7 @@ export default function PendingQuestDetailsModal({
           <button
             type="button"
             className="review-deny-button"
-            onClick={() => openReviewPopup("deny")}
+            onClick={openDenyForm}
           >
             <FaTimes aria-hidden="true" />
             Deny Quest
@@ -104,23 +99,17 @@ export default function PendingQuestDetailsModal({
         </div>
       </Modal>
 
-      {reviewAction && (
+      {showDenyForm && (
         <Modal
-          label={`${reviewAction === "approve" ? "Approve" : "Deny"} ${
-            quest.name
-          }`}
-          onClose={() => setReviewAction(null)}
+          label={`Deny ${quest.name}`}
+          onClose={() => setShowDenyForm(false)}
           className="review-reason-modal"
         >
-          <form onSubmit={handleReviewSubmit}>
-            <h2>
-              {reviewAction === "approve"
-                ? "Approve Quest"
-                : "Deny Quest"}
-            </h2>
+          <form onSubmit={handleDenySubmit}>
+            <h2>Deny Quest</h2>
 
             <label>
-              Reason for {reviewAction === "approve" ? "approval" : "denial"}
+              Reason for denial
               <textarea
                 required
                 rows={6}
@@ -133,7 +122,7 @@ export default function PendingQuestDetailsModal({
             <div className="review-reason-actions">
               <button
                 type="button"
-                onClick={() => setReviewAction(null)}
+                onClick={() => setShowDenyForm(false)}
               >
                 Cancel
               </button>
