@@ -1,5 +1,4 @@
 :root {
-  /* Just going to override the colors up top here... */
   --color-primary: #160142;
   --color-primary-light: #2A0F6B;
   --color-bar-shadow: rgba(22, 1, 66, 0.35);
@@ -96,7 +95,6 @@ p {
   margin: 0;
 }
 
-/* Shared heading styles so every page title and section title match */
 .page-title {
   margin: 0;
   font-size: 28px;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { formatQuestDate, type QuestProps } from "../data/quests";
+import { formatQuestDate, hasRsvped, type QuestProps } from "../data/quests";
 import Modal from "./modal";
 import "./questDetailsModal.css";
 
@@ -15,8 +15,8 @@ export default function QuestDetailsModal({
   onClose,
   onRsvp,
 }: QuestDetailsModalProps) {
-  const [acknowledged, setAcknowledged] = useState(false); // requirements
-  const [showReminder, setShowReminder] = useState(false); // popup notif
+  const [acknowledged, setAcknowledged] = useState(false);
+  const [showReminder, setShowReminder] = useState(false);
 
   function handleReminderChoice(allowReminders: boolean) {
     onRsvp(quest.id);
@@ -69,6 +69,8 @@ export default function QuestDetailsModal({
             <strong>{quest.participantCount ?? 0}</strong>{" "}
             {quest.participantCount === 1 ? "participant" : "participants"}
           </p>
+        ) : hasRsvped(quest.id) ? (
+          <p className="rsvp-confirmed">✓ You're going to this quest!</p>
         ) : (
           <>
             <label className="requirements-checkbox">

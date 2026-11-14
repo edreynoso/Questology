@@ -25,7 +25,6 @@
   font-size: 12px;
 }
 
-/* Inset photo card: beige gap separates it from the header */
 .community-banner {
   position: relative;
   display: flex;
@@ -76,8 +75,6 @@
   color: var(--color-surface);
 }
 
-/* quest sections */
-
 .quest-sections {
   padding: 4px 8px 24px;
 }
@@ -96,14 +93,10 @@
   margin: 2px 0 0 12px;
 }
 
-/* upcoming quests */
-
 .upcoming-quests {
   margin-top: 4px;
   color: var(--color-text-accent);
 }
-
-/* pending quests (moderators only) */
 
 .pending-quests {
   margin-top: 4px;
@@ -180,7 +173,7 @@ button.quest-list-item + button.quest-list-item {
   justify-content: space-between;
 }
 
-/* Settings sits at the top; Joined stays pinned to the bottom */
+/* Pins Joined to the bottom when there is no settings button */
 .community-actions .community-status {
   margin-top: auto;
 }

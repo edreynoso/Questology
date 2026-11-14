@@ -10,7 +10,9 @@ import { getCommunity } from "../data/communities";
 import {
   formatQuestDate,
   getCommunityQuests,
+  hasRsvped,
   reviewQuest,
+  rsvpToQuest,
   submitQuest,
   type QuestProps,
 } from "../data/quests";
@@ -73,10 +75,9 @@ export default function CommunityQuests() {
   const navigate = useNavigate();
   const [selectedQuest, setSelectedQuest] = useState<QuestProps | null>(null);
   const [showCreateQuest, setShowCreateQuest] = useState(false);
-  const [signedUpQuestIds, setSignedUpQuestIds] = useState<string[]>([]);
   const [selectedPendingQuest, setSelectedPendingQuest] =
     useState<QuestProps | null>(null);
-  // Bumped after submit/review so quests re-read from the data module
+  // Bumped after submit/review/RSVP so quests re-read from the data module
   const [, setQuestDataVersion] = useState(0);
 
   if (!community) {
@@ -84,6 +85,9 @@ export default function CommunityQuests() {
   }
 
   const quests = getCommunityQuests(community.id, "approved");
+  const signedUpQuestIds = quests
+    .filter((quest) => hasRsvped(quest.id))
+    .map((quest) => quest.id);
   const activeQuests = quests.filter((quest) => quest.status === "active");
   const upcomingQuests = quests.filter((quest) => quest.status === "upcoming");
   const currentCommunityId = community.id;
@@ -93,13 +97,14 @@ export default function CommunityQuests() {
     : [];
   
   function handleSubmitForReview(quest: QuestProps) {
-    if (isModeratedCommunity) {
-      submitQuest(quest, currentCommunityId);
-      setQuestDataVersion((version) => version + 1);
-    }
-
+    submitQuest(quest, currentCommunityId);
+    setQuestDataVersion((version) => version + 1);
     setShowCreateQuest(false);
-    toast.success(`${quest.name} was submitted for review!`);
+    toast.success(
+      isModeratedCommunity
+        ? `${quest.name} was submitted for review!`
+        : `${quest.name} was posted to Upcoming Quests!`,
+    );
   }
 
   function handleQuestReviewed(questId: string, action: "approve" | "deny") {
@@ -108,13 +113,8 @@ export default function CommunityQuests() {
   }
 
   function handleRsvp(questId: string) {
-    setSignedUpQuestIds((currentIds) => {
-      if (currentIds.includes(questId)) {
-        return currentIds;
-      }
-
-      return [...currentIds, questId];
-    });
+    rsvpToQuest(questId);
+    setQuestDataVersion((version) => version + 1);
   }
   
   return (
@@ -125,7 +125,6 @@ export default function CommunityQuests() {
           Communities
         </Link>
 
-        {/* community banner */}
         <section
           className="community-banner"
           style={bannerStyle(community.bannerUrl, true)}
@@ -161,9 +160,7 @@ export default function CommunityQuests() {
           <p>{community.description}</p>
         </section>
 
-        {/* quests list */}
         <div className="quest-sections">
-          {/* active quests */}
           <section className="active-quests">
             <h3 className="section-title">Active Quests</h3>
             <QuestList
@@ -174,7 +171,6 @@ export default function CommunityQuests() {
             />
           </section>
 
-          {/* upcoming quests */}
           <section className="upcoming-quests">
             <h3 className="section-title">Upcoming Quests</h3>
             <QuestList
@@ -185,7 +181,6 @@ export default function CommunityQuests() {
             />
           </section>
 
-          {/* pending quests (moderators only) */}
           {isModeratedCommunity && (
             <section className="pending-quests">
               <h3 className="section-title">Pending Quests</h3>

@@ -11,7 +11,6 @@
     box-shadow: 0 -4px 12px var(--color-bar-shadow);
 }
 
-/* Active tab indicator: pill under the current tab's icon */
 #footer .NavButton {
     position: relative;
 }

@@ -6,7 +6,6 @@
     padding: 0 1rem;
     position: relative;
     z-index: 10;
-    /* Darker at the screen edge, lighter toward the content */
     background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
     box-shadow: 0 4px 12px var(--color-bar-shadow);
 }

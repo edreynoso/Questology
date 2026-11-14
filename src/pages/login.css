@@ -1,0 +1,122 @@
+.LoginPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100svh;
+    padding: 32px 16px calc(32px + env(safe-area-inset-bottom));
+    background: var(--color-primary);
+}
+
+.LoginBrand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 24px;
+    color: var(--color-surface);
+    text-align: center;
+}
+
+.LoginBrand svg {
+    font-size: 52px;
+}
+
+.LoginBrand h1 {
+    margin: 0;
+    color: var(--color-surface);
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.LoginBrand p {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.LoginCard {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+    padding: 24px 20px;
+    border-radius: 16px;
+    background: var(--color-surface);
+    box-shadow: 0 8px 24px var(--color-bar-shadow);
+}
+
+.LoginCard .page-title {
+    margin-bottom: 4px;
+    color: var(--color-primary);
+}
+
+.LoginCard label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--color-text-accent);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.LoginCard input {
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--color-text-muted);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text-accent);
+    font: inherit;
+    font-size: 16px; /* 16px keeps iOS from zooming on focus */
+    font-weight: 400;
+}
+
+.LoginCard input:focus {
+    border-color: var(--color-primary);
+    outline: 2px solid var(--color-primary);
+    outline-offset: -1px;
+}
+
+.LoginSubmit {
+    min-height: 48px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: var(--color-surface);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.LoginSubmit:active {
+    transform: translateY(1px);
+}
+
+.LoginSwitch {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 20px;
+    color: var(--color-surface);
+    font-size: 14px;
+}
+
+.LoginSwitch button {
+    min-height: 44px;
+    padding: 0 4px;
+    border: none;
+    background: transparent;
+    color: var(--color-surface);
+    font: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+}
