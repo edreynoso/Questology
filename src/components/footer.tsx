@@ -1,5 +1,5 @@
 import './footer.css'
-import { FaMap, FaRegCompass, FaUsers } from 'react-icons/fa'
+import { FaMap, FaRegCompass, FaUser, FaUsers } from 'react-icons/fa'
 import NavButton from './navButton'
 
 export default function Footer() {
@@ -13,13 +13,18 @@ export default function Footer() {
             <NavButton
                 icon={FaRegCompass}
                 label="Discover"
-                action="toast"
+                action="unavailable"
                 message="Discovery is not currently implemented!"/>
             <NavButton
                 icon={FaMap}
                 label="Quests"
-                action="toast"
+                action="unavailable"
                 message="Your Quests page is currently under maintenance!"/>
+            <NavButton
+                icon={FaUser}
+                label="Profile"
+                action="unavailable"
+                message="Profile settings are not implemented!"/>
         </section>
     )
 }

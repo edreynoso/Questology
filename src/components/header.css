@@ -1,32 +1,18 @@
 #header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    min-height: 80px;
+    min-height: 70px;
     padding: 0 1rem;
-    background: var(--color-primary);
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    box-shadow: 0 4px 12px var(--color-bar-shadow);
 }
 
-.Back,
-.ProfileIcon {
-    flex: 1;
-    display: flex;
-}
-
-.ProfileIcon {
-    justify-content: flex-end;
-}
-
-.Title {
-    flex: 3;
-    text-align: center;
-    color: var(--color-bg);
-}
-
-#header .NavButton {
-    font-size: 44px;
-}
-
-.Title h1 {
+#header .Title {
+    margin: 0;
     color: var(--color-surface);
+    font-size: 28px;
+    letter-spacing: -0.5px;
 }

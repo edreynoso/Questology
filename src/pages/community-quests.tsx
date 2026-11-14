@@ -1,14 +1,23 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { FaCog } from "react-icons/fa";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { FaChevronLeft, FaCog } from "react-icons/fa";
 import { toast } from "react-toastify";
 import CreateQuestButton from "../components/createQuestButton";
 import CreateQuestModal from "../components/createQuestModal";
 import QuestDetailsModal from "../components/questDetailsModal";
+import PendingQuestDetailsModal from "../components/pendingQuestDetailsModal";
 import { getCommunity } from "../data/communities";
-import { formatQuestDate, getQuest, type QuestProps } from "../data/quests";
+import {
+  formatQuestDate,
+  getCommunityQuests,
+  hasRsvped,
+  reviewQuest,
+  rsvpToQuest,
+  submitQuest,
+  type QuestProps,
+} from "../data/quests";
 import { bannerStyle } from "../utils/bannerStyle";
-import NotFound from "./notFound";
+import NotFound, { NOT_FOUND_PATH } from "./notFound";
 import "./community-quests.css";
 
 type QuestListProps = {
@@ -16,11 +25,6 @@ type QuestListProps = {
   emptyText: string;
   onSelect: (quest: QuestProps) => void;
   signedUpQuestIds: string[];
-};
-
-type CommunityQuestsProps = {
-  onQuestSubmitted: (quest: QuestProps) => void;
-  approvedQuests: QuestProps[];
 };
 
 function QuestList({
@@ -65,101 +69,100 @@ function QuestList({
   );
 }
 
-export default function CommunityQuests({
-  onQuestSubmitted,
-  approvedQuests,
-}: CommunityQuestsProps) {
+export default function CommunityQuests() {
   const { communityId } = useParams();
   const community = getCommunity(communityId);
   const navigate = useNavigate();
   const [selectedQuest, setSelectedQuest] = useState<QuestProps | null>(null);
   const [showCreateQuest, setShowCreateQuest] = useState(false);
-  const [signedUpQuestIds, setSignedUpQuestIds] = useState<string[]>([]);
+  const [selectedPendingQuest, setSelectedPendingQuest] =
+    useState<QuestProps | null>(null);
+  // Bumped after submit/review/RSVP so quests re-read from the data module
+  const [, setQuestDataVersion] = useState(0);
 
   if (!community) {
     return <NotFound />;
   }
 
- const existingQuests = (community.communityQuestIds ?? [])
-    .map(getQuest)
-    .filter((quest): quest is QuestProps => quest !== undefined);
-
-  const newlyApprovedQuests =
-    community.id === "rock-climbing" ? approvedQuests : [];
-
-  const quests = [...existingQuests, ...newlyApprovedQuests].sort((a, b) =>
-    a.date.localeCompare(b.date),
-  );
+  const quests = getCommunityQuests(community.id, "approved");
+  const signedUpQuestIds = quests
+    .filter((quest) => hasRsvped(quest.id))
+    .map((quest) => quest.id);
   const activeQuests = quests.filter((quest) => quest.status === "active");
   const upcomingQuests = quests.filter((quest) => quest.status === "upcoming");
-  const isModeratedCommunity = community.id === "rock-climbing";
+  const currentCommunityId = community.id;
+  const isModeratedCommunity = community.isModerated;
+  const pendingQuests = isModeratedCommunity
+    ? getCommunityQuests(currentCommunityId, "pending")
+    : [];
   
   function handleSubmitForReview(quest: QuestProps) {
-    if (isModeratedCommunity) {
-      onQuestSubmitted(quest);
-    }
-
+    submitQuest(quest, currentCommunityId);
+    setQuestDataVersion((version) => version + 1);
     setShowCreateQuest(false);
-    toast.success(`${quest.name} was submitted for review!`);
+    toast.success(
+      isModeratedCommunity
+        ? `${quest.name} was submitted for review!`
+        : `${quest.name} was posted to Upcoming Quests!`,
+    );
+  }
+
+  function handleQuestReviewed(questId: string, action: "approve" | "deny") {
+    reviewQuest(questId, action);
+    setQuestDataVersion((version) => version + 1);
   }
 
   function handleRsvp(questId: string) {
-    setSignedUpQuestIds((currentIds) => {
-      if (currentIds.includes(questId)) {
-        return currentIds;
-      }
-
-      return [...currentIds, questId];
-    });
+    rsvpToQuest(questId);
+    setQuestDataVersion((version) => version + 1);
   }
   
   return (
     <>
       <div className="community-page">
-        {/* community banner */}
+        <Link to="/communities" className="community-back-link">
+          <FaChevronLeft aria-hidden="true" />
+          Communities
+        </Link>
+
         <section
           className="community-banner"
-          style={bannerStyle(community.bannerUrl)}
+          style={bannerStyle(community.bannerUrl, true)}
         >
           <div className="community-heading">
-            <h2>{community.name}</h2>
+            <h2 className="page-title">{community.name}</h2>
 
             <div className="community-actions">
-              <span className="community-status">Joined</span>
-
-              {community.id === "rock-climbing" && (
+              {isModeratedCommunity && (
                 <div className="community-action-buttons">
                   <button
                     type="button"
-                    className="pending-quests-button"
-                    onClick={() => navigate("/moderator/quests")}
-                  >
-                    Pending Quests
-                  </button>
-
-                  <button
-                    type="button"
                     className="community-settings-button"
-                    onClick={() =>
-                      toast.info("Community settings are not implemented yet!")
-                    }
+                    aria-label="Community settings"
+                    title="Community settings"
+                    onClick={() => {
+                      toast.info("Community settings are not implemented yet!");
+                      navigate(NOT_FOUND_PATH, {
+                        state: { feature: "Community settings" },
+                      });
+                    }}
                   >
                     <FaCog aria-hidden="true" />
-                    Settings
                   </button>
                 </div>
               )}
+
+              <span className="community-status">Joined</span>
+
             </div>
           </div>
 
           <p>{community.description}</p>
         </section>
 
-        {/* quests list */}
         <div className="quest-sections">
-          {/* active quests */}
           <section className="active-quests">
-            <h3>Active Quests</h3>
+            <h3 className="section-title">Active Quests</h3>
             <QuestList
               quests={activeQuests}
               emptyText="None at the moment..."
@@ -168,9 +171,8 @@ export default function CommunityQuests({
             />
           </section>
 
-          {/* upcoming quests */}
           <section className="upcoming-quests">
-            <h3>Upcoming Quests</h3>
+            <h3 className="section-title">Upcoming Quests</h3>
             <QuestList
               quests={upcomingQuests}
               emptyText="None at the moment..."
@@ -178,6 +180,18 @@ export default function CommunityQuests({
               signedUpQuestIds={signedUpQuestIds}
             />
           </section>
+
+          {isModeratedCommunity && (
+            <section className="pending-quests">
+              <h3 className="section-title">Pending Quests</h3>
+              <QuestList
+                quests={pendingQuests}
+                emptyText="No quests are waiting for approval."
+                onSelect={setSelectedPendingQuest}
+                signedUpQuestIds={[]}
+              />
+            </section>
+          )}
         </div>
       </div>
 
@@ -198,6 +212,17 @@ export default function CommunityQuests({
           quest={selectedQuest}
           onClose={() => setSelectedQuest(null)}
           onRsvp={handleRsvp}
+        />
+      )}
+
+      {selectedPendingQuest && (
+        <PendingQuestDetailsModal
+          key={selectedPendingQuest.id}
+          quest={selectedPendingQuest}
+          onClose={() => setSelectedPendingQuest(null)}
+          onReview={(action) =>
+            handleQuestReviewed(selectedPendingQuest.id, action)
+          }
         />
       )}
     </>

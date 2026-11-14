@@ -1,6 +1,7 @@
 :root {
-  /* Just going to override the colors up top here... */
   --color-primary: #160142;
+  --color-primary-light: #2A0F6B;
+  --color-bar-shadow: rgba(22, 1, 66, 0.35);
   --color-secondary: #45503B;
   --color-accent: #6F8787;
   --color-text: #747572;
@@ -11,6 +12,8 @@
   --color-overlay: rgba(0, 0, 0, 0.55);
   --color-shadow: rgba(0, 0, 0, 0.6);
   --color-tint: rgba(0, 0, 0, 0.45);
+  --color-tint-light: rgba(0, 0, 0, 0.1);
+  --color-tint-strong: rgba(0, 0, 0, 0.7);
 }
 
 
@@ -90,6 +93,21 @@ h2 {
 }
 p {
   margin: 0;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.28px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 code,

@@ -1,6 +1,7 @@
 import type { IconType } from 'react-icons'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { NOT_FOUND_PATH } from '../pages/notFound'
 import './navButton.css'
 
 type NavButtonProps = {
@@ -8,8 +9,8 @@ type NavButtonProps = {
     label: string;
 } & (
     | { action: 'navigate'; to: string }
-    | { action: 'toast'; message: string }
-    | { action: 'back' }
+    /** Feature without a page yet: shows a toast and goes to the 404 page */
+    | { action: 'unavailable'; message: string }
 )
 
 export default function NavButton(props: NavButtonProps) {
@@ -25,9 +26,11 @@ export default function NavButton(props: NavButtonProps) {
         )
     }
 
-    const handleClick = props.action === 'back'
-        ? () => navigate(-1)
-        : () => toast.info(props.message)
+    function handleClick() {
+        if (props.action !== 'unavailable') return
+        toast.info(props.message, { toastId: `unavailable:${label}` })
+        navigate(NOT_FOUND_PATH, { state: { feature: label } })
+    }
 
     return (
         <button type="button" className="NavButton" aria-label={label} title={label} onClick={handleClick}>
