@@ -30,4 +30,4 @@ To reset the app between testers, clear both keys (dev tools → Application →
 
 - **Greg**: I implemented the header and footer elements, and set up the global CSS color scheme, as well as reviewed pull requests for errors.
 
-- 
+- **Valeria**: I implemented the community quest page, quest details page, and RSVP functionality, including the reminder popup.
