@@ -26,4 +26,4 @@ To reset the app between testers, clear both keys (dev tools → Application →
 
 ## Team contributions
 
-- **Edgar**: login and signup pages, create quest flow and modal views
+- **Edgar**: I implemented the login and signup pages along with the modal view component. Also implemented the create quest flow.
