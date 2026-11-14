@@ -27,3 +27,7 @@ To reset the app between testers, clear both keys (dev tools → Application →
 ## Team contributions
 
 - **Edgar**: I implemented the login and signup pages along with the modal view component. Also implemented the create quest flow.
+
+- **Greg**: I implemented the header and footer elements, and set up the global CSS color scheme, as well as reviewed pull requests for errors.
+
+- 
